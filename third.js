@@ -1,20 +1,28 @@
-const romanToInt = (s) => {
-    const romanNums = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000};
+function romanToInt(line) {
+    const romanNums = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
 
-    let total = 0;
-    let lastValue = 0;
+    let finalValue = 0;
 
-    [...s].forEach((char) => {
+    for (let char of line) {
         const currentValue = romanNums[char];
-        if (currentValue > lastValue) {
-            total += currentValue - 2 * lastValue;
+        const nextValue = romanNums[line[line.indexOf(char) + 1]];
+
+        if (nextValue > currentValue) {
+            finalValue -= currentValue;
         } else {
-            total += currentValue;
+            finalValue += currentValue;
         }
-        lastValue = currentValue;
-    });
-    return total;
-};
+    }
+    return finalValue;
+}
 
 console.log(romanToInt("III"));
 console.log(romanToInt("LVIII"));

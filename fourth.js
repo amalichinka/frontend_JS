@@ -1,16 +1,21 @@
-const removeDuplicates = (nums) => {
-    if (nums.length === 0) return 0;
-
+function removeDuplicates(arr) {
     let uniqueIndex = 0;
-
-    nums.forEach((num, index) => {
-        if (index === 0 || num !== nums[uniqueIndex - 1]) {
-            nums[uniqueIndex] = num;
+    if (arr.length === 0) {
+        return 0;
+    }
+    arr.forEach((value, i) => {
+        if (i > 0 && value !== arr[uniqueIndex]) {
             uniqueIndex++;
+            arr[uniqueIndex] = value;
         }
     });
-    return uniqueIndex;
-};
+    arr.forEach((_, i) => {
+        if (i > uniqueIndex) {
+            arr[i] = '_';
+        }
+    });
+    return uniqueIndex + 1;
+}
 
 let nums1 = [1, 1, 2];
 console.log(removeDuplicates(nums1), nums1);
